@@ -27,7 +27,7 @@ java -jar ShapeChange-2.11.0.jar -Dfile.encoding=UTF-8 -c /io/myshapechangeconfi
 **Note:** For simplicity, mounted ShapeChange configuration files should reference input and output paths using absolute paths to the `/io` folder to ensure input schema can be read from the mounted folder and written output schema are also written to your host machine (or whatever folder you wish to mount your local folder to). For example:
 ```xml
 <input>
-   <parameter name="inputFile" value="/io/[input UML file]"/>
+   <parameter name="inputFile" value="/io/[input file]"/>
    ...
 </input>
 ...

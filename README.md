@@ -55,7 +55,7 @@ Optionally, ShapeChange can accept variables at runtime to complete configuratio
 ```
 Thus using the following command input and output files can be declared:
 ```bash
-java -jar lib/ShapeChange-2.11.0.jar -Dfile.encoding=UTF-8 -c /io/myshapechangeconfig.xml -x '$input$' '/io/myinputmodel.xmi' -x '$output$' '/io/'
+java -jar /ShapeChange/ShapeChange-2.11.0.jar -Dfile.encoding=UTF-8 -c /io/myshapechangeconfig.xml -x '$input$' '/io/myinputmodel.xmi' -x '$output$' '/io/'
 ```
 
 

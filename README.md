@@ -16,7 +16,7 @@ docker build -t shapechange ./ShapeChange-docker/shapechange-context/
 Move your shapechange configuration and data models/application schemas to some folder `[local folder]`
 To use the container mount the folder and run the container following command:
 ```bash
-docker run --rm --it -v [local folder]:/io shapechange
+docker run --rm -it -v [local folder]:/io shapechange
 ```
 This command will open the container with an interactive shell.
 The following commands can be used to run a basic ShapeChange transformation

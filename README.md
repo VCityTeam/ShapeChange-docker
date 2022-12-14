@@ -1,5 +1,5 @@
 # ShapeChange-docker
-A simple docker container for using the ShapeChange transformation tool for processing application schemas for geographic information
+A simple docker container for using the ShapeChange transformation tool (v2.11) for processing application schemas for geographic information
 
 These instructions require a basic understanding of:
 - [Docker](https://docs.docker.com/get-started/overview/)

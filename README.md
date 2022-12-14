@@ -13,20 +13,15 @@ git clone https://github.com/VCityTeam/ShapeChange-docker.git
 docker build -t shapechange ./ShapeChange-docker/shapechange-context/
 ```
 ## How to use
-To view the possible shapechange commands run:
-```bash
-docker run --rm shapechange -h
-```
-**Note:** the entrypoint in the container will execute `java -jar ShapeChange-2.11.0.jar -Dfile.encoding=UTF-8 -c` followed by any arguments passed to the container. To execute a transformation the container requires the shapechange configuration file to be passed as the first argument.
-
-To execute a transformation, move your shapechange configuration and data models/application schemas to some folder `[local folder]`
+To execute a transformation, move your shapechange configuration and data models to some folder, `[local folder]`
 To use the container mount the folder and run the container following command to execute a ShapeChange transformation:
 ```bash
-docker run --rm -v [local folder]:/io shapechange /io/[shapechange configuration file]
+docker run --rm -it -v [local folder]:/io shapechange
 ```
-For example with a ShapeChange configuration file called `config.xml` located in your current working directory in a unix bash shell 
+This command will open the container with an interactive shell.
+The following commands can be used to run a basic ShapeChange transformation with a configuration file `config.xml` saved to the `[local folder]`
 ```bash
-docker run --rm -v $(pwd):/io shapechange /io/config.xml
+java -jar /ShapeChange/ShapeChange-2.11.0.jar -Dfile.encoding=UTF-8 -c /io/config.xml
 ```
 
 **Tip:** use `$(pwd)` or `${pwd}` to select the current working directory when mounting a volume in bash or powershell respectively. See [docker documentation](https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only) for more information.
@@ -66,5 +61,5 @@ docker run --rm -v [local folder]:/io shapechange /io/[shapechange configuration
 ```
 For example with a ShapeChange configuration file and input file called `config.xml` and `input.xmi` located in your current working directory in a unix bash shell 
 ```bash
-docker run --rm -v $(pwd):/io shapechange /io/config.xml -x '$input$' '/io/input.xmi' -x '$output$' '/io/'
+java -jar /ShapeChange/ShapeChange-2.11.0.jar -Dfile.encoding=UTF-8 -c /io/config.xml -x '$input$' '/io/input.xmi' -x '$output$' '/io/'
 ```

@@ -14,17 +14,18 @@ docker build -t shapechange ./ShapeChange-docker/shapechange-context/
 ```
 ## How to use
 Move your shapechange configuration and data models/application schemas to some folder `[local folder]`
-To use the container mount the folder and run the container following command:
+To use the container mount the folder and run the container following command to execute a ShapeChange transformation:
 ```bash
-docker run --rm --it -v [local folder]:/io shapechange
+docker run --rm -it -v [local folder]:/io shapechange /io/[shapechange configuration file]
 ```
-This command will open the container with an interactive shell.
-The following commands can be used to run a basic ShapeChange transformation
+For example with a ShapeChange configuration file called `config.xml` located in your current working directory in a unix bash shell 
 ```bash
-java -jar ShapeChange-2.11.0.jar -Dfile.encoding=UTF-8 -c /io/myshapechangeconfig.xml
+docker run --rm -it -v $(pwd):/io shapechange /io/config.xml
 ```
 
-**Note:** For simplicity, mounted ShapeChange configuration files should reference input and output paths using absolute paths to the `/io` folder to ensure input schema can be read from the mounted folder and written output schema are also written to your host machine (or whatever folder you wish to mount your local folder to). For example:
+**Tip:** use `$(pwd)` or `${pwd}` to select the current working directory when mounting a volume in bash or powershell respectively. See [docker documentation](https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only) for more information.
+
+**Note:** For simplicity, mounted ShapeChange configuration files should reference input and output paths using absolute paths to the `/io` folder to ensure input schema can be read from the mounted folder and written output schema are also written to your host machine. For example:
 ```xml
 <input>
    <parameter name="inputFile" value="/io/[input file]"/>
@@ -39,7 +40,7 @@ java -jar ShapeChange-2.11.0.jar -Dfile.encoding=UTF-8 -c /io/myshapechangeconfi
 </targets>
 ```
 
-Optionally, ShapeChange can accept variables at runtime to complete configuration files. For example the variables `$input$` and `$output$` can be used to specify the input model/schema filename and output directory:
+Optionally, this docker container can accept variables at runtime for replacing variables in configuration files. For example the variables `$input$` and `$output$` can be used to specify the input model/schema filename and output directory:
 ```xml
 <input>
   <parameter name="inputFile" value="$input$"/>
@@ -53,10 +54,11 @@ Optionally, ShapeChange can accept variables at runtime to complete configuratio
   </target>
 </targets>
 ```
-Thus using the following command input and output files can be declared:
+Thus using the following command input and output files and folders can be declared:
 ```bash
-java -jar lib/ShapeChange-2.11.0.jar -Dfile.encoding=UTF-8 -c /io/myshapechangeconfig.xml -x '$input$' '/io/myinputmodel.xmi' -x '$output$' '/io/'
+docker run --rm -it -v [local folder]:/io shapechange /io/[shapechange configuration file] -x '$input$' '/io/[input file]' -x '$output$' '/io/'
 ```
-
-
-**Tip:** use `$(pwd)` to select the current working directory when mounting a volume. See [docker documentation](https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only) for more information.
+For example with a ShapeChange configuration file and input file called `config.xml` and `input.xmi` located in your current working directory in a unix bash shell 
+```bash
+docker run --rm -it -v $(pwd):/io shapechange /io/config.xml -x '$input$' '/io/input.xmi' -x '$output$' '/io/'
+```

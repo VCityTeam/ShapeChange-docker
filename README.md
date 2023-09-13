@@ -61,5 +61,5 @@ docker run --rm -v [local folder]:/io shapechange /io/[shapechange configuration
 ```
 For example with a ShapeChange configuration file and input file called `config.xml` and `input.xmi` located in your current working directory in a unix bash shell 
 ```bash
-java -jar /ShapeChange/ShapeChange-2.11.0.jar -Dfile.encoding=UTF-8 -c /io/config.xml -x '$input$' '/io/input.xmi' -x '$output$' '/io/'
+java -jar /ShapeChange/ShapeChange-2.13.0.jar -Dfile.encoding=UTF-8 -c /io/config.xml -x '$input$' '/io/input.xmi' -x '$output$' '/io/'
 ```

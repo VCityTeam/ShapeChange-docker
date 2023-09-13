@@ -21,7 +21,7 @@ docker run --rm -it -v [local folder]:/io shapechange
 This command will open the container with an interactive shell.
 The following commands can be used to run a basic ShapeChange transformation with a configuration file `config.xml` saved to the `[local folder]`
 ```bash
-java -jar /ShapeChange/ShapeChange-2.11.0.jar -Dfile.encoding=UTF-8 -c /io/config.xml
+java -jar /ShapeChange/ShapeChange-2.13.0.jar -Dfile.encoding=UTF-8 -c /io/config.xml
 ```
 
 **Tip:** use `$(pwd)` or `${pwd}` to select the current working directory when mounting a volume in bash or powershell respectively. See [docker documentation](https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only) for more information.
